@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deploy
+  namespace: qiyu
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: redis-pod
+  template:
+    metadata:
+      labels: 
+        name: redis-pod
+    spec:
+      containers:
+        - name: redis
+          image: redis
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: TZ
+            value: Asia/Shanghai
+          ports:
+            - containerPort: 6379
+          volumeMounts:
+            - name: redis-persistent-storage
+              mountPath: "/var/lib/redis"
+      volumes:
+        - name: redis-persistent-storage
+          persistentVolumeClaim:
+            claimName: redis-pvc

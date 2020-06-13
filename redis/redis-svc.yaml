@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-svc
+  namespace: qiyu
+  labels: 
+    name: redis-svc
+spec:
+  type: NodePort
+  ports:
+  - port: 6379
+    protocol: TCP
+    targetPort: 6379
+    name: http
+    nodePort: 32379
+  selector:
+    name: redis-pod
