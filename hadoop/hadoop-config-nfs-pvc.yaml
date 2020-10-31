@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: hadoop-config-nfs-pvc
+  namespace: qiyu
+  labels:
+    app: hadoop-config-nfs-pvc
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 16Mi
+  selector:
+    matchLabels:
+      release: hadoop-config
+  storageClassName: hostpath
