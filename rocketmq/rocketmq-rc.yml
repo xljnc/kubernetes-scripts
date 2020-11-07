@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: qiyu
+  name: rocketmq
+  labels:
+    app: rocketmq
+
+spec:
+  serviceName: rocketmq
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rocketmq
+  template:
+    metadata:
+      labels:
+        app: rocketmq
+    spec:
+      containers:
+        - name: rocketmq
+          image: foxiswho/rocketmq:4.7.0
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: 400m
+              memory: 1000Mi
+            requests:
+              cpu: 100m
+              memory: 1000Mi
+          env:
+            - name: TZ
+              value: Asia/Shanghai
+            - name: JAVA_OPT
+              value: -Duser.home=/opt
+            - name: JAVA_OPT_EXT
+              value:  -Xmn256m
+          command: ["sh","mqnamesrv"]
+          ports:
+            - containerPort: 9876
+          volumeMounts:
+            - name: vol-logs
+              mountPath: /opt/logs
+            - name: vol-init-d
+              mountPath: /opt/store
+      volumes:
+        - name: vol-logs
+          hostPath:
+            path: /Volumes/HGST-MAC/gitWorkspace/kubernetes-scripts/rocketmq/logs
+            type: Directory
+        - name: vol-init-d
+          hostPath:
+            path: /Volumes/HGST-MAC/gitWorkspace/kubernetes-scripts/rocketmq/store
+            type: Directory
