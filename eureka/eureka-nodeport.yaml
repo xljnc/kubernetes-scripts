@@ -11,6 +11,8 @@ spec:
   - name: server
     port: 8761
     targetPort: 8761
-    nodePort: 38761
+    nodePort: 31761
   selector:
     app: eureka
+
+
