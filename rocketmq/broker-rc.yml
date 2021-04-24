@@ -32,7 +32,7 @@ spec:
             - name: TZ
               value: Asia/Shanghai
             - name: JAVA_OPT_EXT
-              value:  -Duser.home=/opt -Xms1024M -Xmx1024M -Xmn256m
+              value:  -Duser.home=/opt -Xms256M -Xmx512M -Xmn256m
           command: ["sh","mqbroker","-c","/etc/rocketmq/broker.conf","-n","rocketmq:9876","autoCreateTopicEnable=false"]
           ports:
             - containerPort: 10909
