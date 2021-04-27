@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: qiyu
+  name: rmqbroker2
+  labels:
+    app: rmqbroker2
+spec:
+  type: NodePort
+  ports:
+    - port: 31909
+      targetPort: 31909
+      nodePort: 31909
+      name: slave-master
+    - port: 31911
+      targetPort: 31911
+      nodePort: 31911
+      name: listen
+    - port: 31912
+      targetPort: 31912
+      nodePort: 31912
+      name: ha-service
+  selector:
+    app: rmqbroker2

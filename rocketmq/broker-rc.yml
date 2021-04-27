@@ -35,9 +35,9 @@ spec:
               value:  -Duser.home=/opt -Xms256M -Xmx512M -Xmn256m
           command: ["sh","mqbroker","-c","/etc/rocketmq/broker.conf","-n","rocketmq:9876","autoCreateTopicEnable=false"]
           ports:
-            - containerPort: 10909
-            - containerPort: 10911
-            - containerPort: 10912
+            - containerPort: 30909
+            - containerPort: 30911
+            - containerPort: 30912
           volumeMounts:
             - name: vol-logs
               mountPath: /opt/logs

@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: rmqbroker-slave
+  name: rmqbroker2
   namespace: qiyu
   labels:
-    app: rmqbroker-slave
+    app: rmqbroker2
 
 spec:
-  serviceName: rmqbroker-slave
+  serviceName: rmqbroker2
   replicas: 1
   selector:
     matchLabels:
-      app: rmqbroker-slave
+      app: rmqbroker2
   template:
     metadata:
       labels:
-        app: rmqbroker-slave
+        app: rmqbroker2
     spec:
       containers:
-        - name: rmqbroker-slave
+        - name: rmqbroker
           image: foxiswho/rocketmq:4.7.0
           imagePullPolicy: IfNotPresent
           resources:
@@ -31,32 +31,30 @@ spec:
           env:
             - name: TZ
               value: Asia/Shanghai
-            - name: NAMESRV_ADDR
-              value: rocketmq:9876
             - name: JAVA_OPT_EXT
               value:  -Duser.home=/opt -Xms256M -Xmx512M -Xmn256m
-          command: ["sh","mqbroker","-c","/etc/rocketmq/broker-s.conf","-n","rocketmq:9876","autoCreateTopicEnable=false"]
+          command: ["sh","mqbroker","-c","/etc/rocketmq/broker2.conf","-n","rocketmq:9876","autoCreateTopicEnable=false"]
           ports:
-            - containerPort: 30919
-            - containerPort: 30921
-            - containerPort: 30922
+            - containerPort: 31909
+            - containerPort: 31911
+            - containerPort: 31912
           volumeMounts:
             - name: vol-logs
               mountPath: /opt/logs
             - name: vol-store
               mountPath: /opt/store
-            - name: vol-broker-s
-              mountPath: /etc/rocketmq/broker-s.conf
+            - name: vol-broker
+              mountPath: /etc/rocketmq/broker2.conf
       volumes:
         - name: vol-logs
           hostPath:
-            path: /Volumes/HGST-MAC/gitWorkspace/kubernetes-scripts/rocketmq/logs-b-s
+            path: /Volumes/HGST-MAC/gitWorkspace/kubernetes-scripts/rocketmq/logs-b2/
             type: Directory
         - name: vol-store
           hostPath:
-              path: /Volumes/HGST-MAC/gitWorkspace/kubernetes-scripts/rocketmq/store-b-s
+              path: /Volumes/HGST-MAC/gitWorkspace/kubernetes-scripts/rocketmq/store-b2
               type: Directory
-        - name: vol-broker-s
+        - name: vol-broker
           hostPath:
-              path: /Volumes/HGST-MAC/gitWorkspace/kubernetes-scripts/rocketmq/conf/broker-s.conf
-              type: File
+            path: /Volumes/HGST-MAC/gitWorkspace/kubernetes-scripts/rocketmq/conf/broker2.conf
+            type: File

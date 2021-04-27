@@ -14,6 +14,9 @@ kubectl delete -f  broker-rc.yml
 kubectl delete -f  broker-service.yml
 
 
+kubectl delete -f  broker2-rc.yml
+kubectl delete -f  broker2-service.yml
+
 kubectl delete -f  rocketmq-rc.yml
 kubectl delete -f  rocketmq-service.yml
 
