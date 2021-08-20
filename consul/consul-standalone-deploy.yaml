@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: consul
+  namespace: qiyu
+spec:
+  serviceName: consul
+  replicas: 1
+  selector:
+    matchLabels:
+      app: consul
+  template:
+    metadata:
+      labels:
+        app: consul
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: consul
+        image: consul:latest
+        args:
+             - "agent"
+             - "-dev"
+             - "-ui"
+        env:
+            - name: PODIP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+        ports:
+            - containerPort: 8500
+              name: ui-port
+            - containerPort: 8443
+              name: https-port
