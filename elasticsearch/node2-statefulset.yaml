@@ -59,4 +59,4 @@ spec:
       volumes:
       - name: esdata
         persistentVolumeClaim:
-          claimName: elasticsearch-pvc2
+          claimName: local-pvc-es2
