@@ -27,7 +27,7 @@ spec:
             postStart:
               exec:
                 command: ["/bin/bash", "-c", "sysctl -w vm.max_map_count=262144; ulimit -l unlimited;"]
-          image: elasticsearch:7.14.0
+          image: elasticsearch:7.14.1
           imagePullPolicy: IfNotPresent
           securityContext:
             privileged: true

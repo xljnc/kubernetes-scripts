@@ -23,7 +23,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: elasticsearch-master
-          image: elasticsearch:7.14.0 #根据需要修改镜像
+          image: elasticsearch:7.14.1 #根据需要修改镜像
           imagePullPolicy: IfNotPresent
           securityContext:
             privileged: true  #获取root权限,这样才能进行初始化命令执行.
