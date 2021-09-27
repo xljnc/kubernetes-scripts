@@ -4,10 +4,10 @@ metadata:
   labels:
     elastic-app: elasticsearch
     role: node
-  name: elasticsearch-node1
+  name: elasticsearch-node
   namespace: qiyu
 spec:
-  replicas: 1
+  replicas: 2
   serviceName: elasticsearch-service
   selector:
     matchLabels:
@@ -22,7 +22,7 @@ spec:
       serviceAccountName: elasticsearch-admin
       restartPolicy: Always
       containers:
-        - name: elasticsearch-node1
+        - name: elasticsearch-node
           lifecycle:
             postStart:
               exec:
@@ -56,7 +56,14 @@ spec:
               value: "true"
             - name: ES_JAVA_OPTS
               value: "-Xms1g -Xmx1g"
-      volumes:
-      - name: esdata
-        persistentVolumeClaim:
-          claimName: local-pvc-es1
+  volumeClaimTemplates:
+  - metadata:
+      name: esdata
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "anything"
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+          

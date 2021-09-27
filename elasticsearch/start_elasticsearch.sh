@@ -13,6 +13,5 @@ kubectl create -f serviceaccount.yaml;
 kubectl create -f clusterrole.yaml;
 kubectl create -f master-statefulset.yaml;
 kubectl create -f elasticsearch-discovery-service.yaml;
-kubectl create -f node1-statefulset.yaml;
-kubectl create -f node2-statefulset.yaml;
+kubectl create -f node-statefulset.yaml;
 kubectl create -f elasticsearch-service.yaml;
