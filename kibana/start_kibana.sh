@@ -1,5 +1,5 @@
 #!/bin/bash
-kubectl create -f kibana-deployment.yaml;
-kubectl create -f kibana-service.yaml;
+kubectl apply -f kibana-deployment.yaml;
+kubectl apply -f kibana-service.yaml;
 
 echo -e "\nstart success"

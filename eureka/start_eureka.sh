@@ -1,4 +1,4 @@
 #!/bin/bash
-kubectl create -f eureka-svc.yaml;
-kubectl create -f eureka-statefulset.yaml;
-kubectl create -f eureka-nodeport.yaml;
+kubectl apply -f eureka-svc.yaml;
+kubectl apply -f eureka-statefulset.yaml;
+kubectl apply -f eureka-nodeport.yaml;

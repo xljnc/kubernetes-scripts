@@ -9,9 +9,9 @@ mkdir -p /Volumes/HGST-MAC/gitWorkspace/kubernetes-scripts/elasticsearch/data2
 chmod 777 /Volumes/HGST-MAC/gitWorkspace/kubernetes-scripts/elasticsearch/data1
 chmod 777 /Volumes/HGST-MAC/gitWorkspace/kubernetes-scripts/elasticsearch/data2
 
-kubectl create -f serviceaccount.yaml;
-kubectl create -f clusterrole.yaml;
-kubectl create -f master-statefulset.yaml;
-kubectl create -f elasticsearch-discovery-service.yaml;
-kubectl create -f node-statefulset.yaml;
-kubectl create -f elasticsearch-service.yaml;
+kubectl apply -f serviceaccount.yaml;
+kubectl apply -f clusterrole.yaml;
+kubectl apply -f master-statefulset.yaml;
+kubectl apply -f elasticsearch-discovery-service.yaml;
+kubectl apply -f node-statefulset.yaml;
+kubectl apply -f elasticsearch-service.yaml;

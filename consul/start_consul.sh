@@ -1,3 +1,3 @@
 #!/bin/bash
-kubectl create -f consul-cluster-deploy.yaml;
-kubectl create -f consul-svc.yaml;
+kubectl apply -f consul-cluster-deploy.yaml;
+kubectl apply -f consul-svc.yaml;
