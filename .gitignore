@@ -2,5 +2,5 @@
 /nacos/nacos-k8s/
 /nacos/nacos/storage/
 /.idea/
-/nacos/nacos-k8s/
 /mongodb/data/
+/nacos/nacos-k8s/storage/

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sentinel
+  namespace: qiyu
+  labels:
+    app: sentinel
+spec:
+  serviceName: sentinel-svc
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sentinel
+      annotations:
+        pod.alpha.kubernetes.io/initialized: "true"
+    spec:
+      containers:
+        - name: sentinel
+          imagePullPolicy: IfNotPresent
+          image: kitkit/sentinel-dashboard:1.8.2
+          ports:
+            - containerPort: 8080
+              name: client
+          env:
+            - name: TZ
+              value: Asia/Shanghai
+            - name: JAVA_OPTS
+              value: "-Dserver.port=8080 -Dcsp.sentinel.dashboard.server=127.0.0.1:8080 -Dsentinel.dashboard.auth.username=sentinel -Dsentinel.dashboard.auth.password=sentinel -Dserver.servlet.session.timeout=7200"
+  selector:
+    matchLabels:
+      app: sentinel
